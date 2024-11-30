@@ -1,0 +1,68 @@
+<!-- views/dashboard.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checklist Dashboard</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Checklist Evaluation Results</h1>
+
+    <!-- Form to add new user entries -->
+    <form id="form" action="/submit" method="POST">
+      <label for="valuationFeePaid">Valuation Fee Paid:</label>
+      <select name="valuationFeePaid" id="valuationFeePaid">
+          <option value="true">Yes</option>
+          <option value="false">No</option>
+      </select>
+  
+      <label for="isUkResident">UK Resident:</label>
+      <select name="isUkResident" id="isUkResident">
+          <option value="true">Yes</option>
+          <option value="false">No</option>
+      </select>
+  
+      <label for="riskRating">Risk Rating:</label>
+      <select name="riskRating" id="riskRating">
+          <option value="Low">Low</option>
+          <option value="Medium">Medium</option>
+          <option value="High">High</option>
+      </select>
+  
+      <label for="loanRequired">Loan Required:</label>
+      <input type="number" name="loanRequired" id="loanRequired" required />
+  
+      <label for="purchasePrice">Purchase Price:</label>
+      <input type="number" name="purchasePrice" id="purchasePrice" required />
+  
+      <button type="submit">Check Results</button>
+  </form>
+  
+
+    <% if (results) { %>
+      <h2>Evaluation Results</h2>
+      <table id="resultsTable">
+        <thead>
+          <tr>
+            <th>Rule</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% results.forEach((result) => { %>
+            <tr class="<%= result.status.toLowerCase() %>">
+              <td><%= result.name %></td>
+              <td><%= result.status %></td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    <% } %>
+  </div>
+
+  <script src="/app.js"></script>
+</body>
+</html>
