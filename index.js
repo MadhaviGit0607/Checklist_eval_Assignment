@@ -8,7 +8,6 @@ import bodyParser from 'body-parser';
 const app = express();
 const PORT = 3000;
 
-// Set up EJS as the template engine
 app.set("view engine", "ejs");
 app.use(express.static(path.join(process.cwd(), 'public')));
 
